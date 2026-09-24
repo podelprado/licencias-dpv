@@ -1,0 +1,23 @@
+{
+  "name": "licencias-dpv",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Sistema de gestión de licencias de empleados",
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "dev:backend": "npm run start:dev --workspace=backend",
+    "dev:frontend": "npm run dev --workspace=frontend",
+    "dev:electron": "cd electron && npm run dev",
+    "build:backend": "npm run build --workspace=backend",
+    "build:frontend": "npm run build --workspace=frontend",
+    "build:win": "cd electron && npm run build",
+    "build:linux": "cd electron && npm run build:linux",
+    "release": "npm run build:backend && npm run build:frontend && npm run build:win"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

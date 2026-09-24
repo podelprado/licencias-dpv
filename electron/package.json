@@ -1,0 +1,69 @@
+{
+  "name": "licencias-dpv-electron",
+  "version": "1.0.0",
+  "description": "Sistema de Licencias DPV",
+  "author": "DPV",
+  "main": "src/main.js",
+  "licenciasMode": "server",
+  "scripts": {
+    "dev": "electron .",
+    "dev:client": "cross-env LICENCIAS_MODE=client electron .",
+    "build:server": "cross-env LICENCIAS_MODE=server electron-builder --win --config.productName=\"Licencias DPV Servidor\"",
+    "build:client": "cross-env LICENCIAS_MODE=client electron-builder --win --config.productName=\"Licencias DPV Cliente\" --config.extraMetadata.licenciasMode=client",
+    "build:server:linux": "cross-env LICENCIAS_MODE=server electron-builder --linux --config.productName=\"Licencias DPV Servidor\"",
+    "build:client:linux": "cross-env LICENCIAS_MODE=client electron-builder --linux --config.productName=\"Licencias DPV Cliente\""
+  },
+  "dependencies": {
+    "electron-log": "^5.1.2",
+    "cross-env": "^7.0.3"
+  },
+  "devDependencies": {
+    "electron": "29.4.6",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "ar.gob.dpv.licencias",
+    "productName": "Licencias DPV",
+    "copyright": "DPV",
+    "electronVersion": "29.4.6",
+    "directories": {
+      "output": "../release"
+    },
+    "files": [
+      "src/**/*",
+      "assets/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "../",
+        "to": "app",
+        "filter": [
+          "backend/**/*",
+          "frontend/**/*",
+          "docker-compose.yml",
+          "!**/node_modules/**",
+          "!**/dist/**",
+          "!**/.git/**"
+        ]
+      }
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "assets/icon.ico",
+      "signingHashAlgorithms": null,
+      "sign": null
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Licencias DPV"
+    },
+    "linux": {
+      "target": "AppImage",
+      "icon": "assets/icon.png",
+      "category": "Office"
+    }
+  }
+}
